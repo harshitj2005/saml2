@@ -33,7 +33,7 @@ create_authn_request = (issuer, assert_endpoint, destination, force_authn, conte
 
   id = '_' + crypto.randomBytes(21).toString('hex')
   xml = xmlbuilder.create
-    AuthnRequest:
+    'samlp:AuthnRequest':
       '@xmlns': XMLNS.SAMLP
       '@xmlns:saml': XMLNS.SAML
       '@Version': '2.0'
@@ -44,10 +44,10 @@ create_authn_request = (issuer, assert_endpoint, destination, force_authn, conte
       '@ProtocolBinding': 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST'
       '@ForceAuthn': force_authn
       'saml:Issuer': issuer
-      NameIDPolicy:
+      'samlp:NameIDPolicy':
         '@Format': nameid_format or 'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified'
         '@AllowCreate': 'true'
-      RequestedAuthnContext: context_element
+      'samlp:RequestedAuthnContext': context_element
   .end()
   { id, xml }
 
